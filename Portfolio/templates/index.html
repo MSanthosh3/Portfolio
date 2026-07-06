@@ -59,6 +59,12 @@
       backdrop-filter: none !important;
     }
 
+    @media (max-width: 767px) {
+      #navbar {
+        position: absolute !important;
+      }
+    }
+
     .card-hover {
       transition: transform .25s, box-shadow .25s;
     }
@@ -116,7 +122,7 @@
 <body class="bg-slate-950 text-slate-100 dark">
 
   <!-- NAVBAR -->
-  <nav id="navbar" class="fixed top-0 w-full z-50 glass border-b border-slate-800 transition-all duration-300">
+  <nav id="navbar" class="absolute md:fixed top-0 w-full z-50 glass border-b border-slate-800 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#hero" class="text-xl font-bold gradient-text">SM</a>
       <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
@@ -494,7 +500,7 @@
 
   <div id="chat-panel"
     class="hidden fixed bottom-24 right-4 left-4 sm:right-6 sm:left-auto z-50 w-auto sm:w-96 flex flex-col glass border border-slate-700 rounded-2xl shadow-2xl shadow-indigo-500/20 overflow-hidden"
-    style="height:480px">
+    style="height:480px; background-color: #0b0f19 !important;">
     <!-- Header -->
     <div
       class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-indigo-600/80 to-purple-600/80 border-b border-slate-700">
@@ -643,6 +649,19 @@
       }
       btn.textContent = 'Send Message 🚀';
       btn.disabled = false;
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuBtn = document.getElementById('menu-btn');
+      const navbar = document.getElementById('navbar');
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+          mobileMenu.classList.add('hidden');
+          navbar.classList.remove('mobile-nav-open');
+        }
+      }
     });
   </script>
 </body>
