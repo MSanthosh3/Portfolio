@@ -263,6 +263,16 @@ KNOWLEDGE_BASE = {
             "Yes! Santhosh is open to new opportunities in AI/ML engineering. Connect via email (bvmsanthosh@gmail.com) or the contact form. Let's build something great! 🚀"
         ]
     },
+    'laravel': {
+        'triggers': [
+            'laravel', 'php', 'react', 'web development', 'database migration', 'db migration', 'migration'
+        ],
+        'responses': [
+            "Santhosh worked in PHP, Laravel, and React for some time, and his standout task was DB migration.",
+            "Yes, he has experience working in PHP, Laravel, and React. His standout task was database migration!",
+            "Santhosh worked with PHP, Laravel, and React for some time, with DB migration being his standout task. 🚀"
+        ]
+    },
     'location': {
         'triggers': [
             'where are you from', 'location', 'where do you live',
