@@ -54,6 +54,11 @@
       border: 1px solid rgba(255, 255, 255, .08);
     }
 
+    #navbar.mobile-nav-open {
+      background: #020617 !important;
+      backdrop-filter: none !important;
+    }
+
     .card-hover {
       transition: transform .25s, box-shadow .25s;
     }
@@ -123,18 +128,18 @@
           class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-xs transition-colors">Dashboard</a>
       </div>
       <button id="menu-btn" class="md:hidden text-slate-300"
-        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('navbar').classList.toggle('mobile-nav-open')">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm text-slate-300">
-      <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">About</a>
-      <a href="#skills" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Skills</a>
-      <a href="#projects" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Projects</a>
-      <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Contact</a>
-      <a href="/dashboard" onclick="document.getElementById('mobile-menu').classList.add('hidden')"
+    <div id="mobile-menu" class="hidden md:hidden px-6 pt-4 pb-6 flex flex-col gap-3 text-sm text-slate-300 bg-slate-950 border-t border-slate-800/80 shadow-2xl">
+      <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('navbar').classList.remove('mobile-nav-open')" class="hover:text-indigo-400 py-1 transition-colors">About</a>
+      <a href="#skills" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('navbar').classList.remove('mobile-nav-open')" class="hover:text-indigo-400 py-1 transition-colors">Skills</a>
+      <a href="#projects" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('navbar').classList.remove('mobile-nav-open')" class="hover:text-indigo-400 py-1 transition-colors">Projects</a>
+      <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('navbar').classList.remove('mobile-nav-open')" class="hover:text-indigo-400 py-1 transition-colors">Contact</a>
+      <a href="/dashboard" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('navbar').classList.remove('mobile-nav-open')"
         class="mt-2 w-full text-center px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-xs font-semibold transition-colors">Dashboard</a>
     </div>
   </nav>
