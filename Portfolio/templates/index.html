@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santhosh M — AI/ML Engineer</title>
+  <meta name="description"
+    content="Portfolio of Santhosh M, AI/ML Engineer specializing in RAG pipelines, LLM fine-tuning, and multi-agent architectures." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            primary: { 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' },
+            accent: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' }
+          },
+          animation: {
+            'fade-in': 'fadeIn .6s ease forwards',
+            'slide-up': 'slideUp .6s ease forwards',
+            'bounce-dot': 'bounceDot 1.2s infinite',
+            'pulse-ring': 'pulseRing 2s infinite',
+          },
+          keyframes: {
+            fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+            slideUp: { from: { opacity: 0, transform: 'translateY(24px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+            bounceDot: { '0%,80%,100%': { transform: 'translateY(0)' }, '40%': { transform: 'translateY(-8px)' } },
+            pulseRing: { '0%': { boxShadow: '0 0 0 0 rgba(99,102,241,.4)' }, '70%': { boxShadow: '0 0 0 14px rgba(99,102,241,0)' }, '100%': { boxShadow: '0 0 0 0 rgba(99,102,241,0)' } }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #818cf8, #c084fc, #67e8f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, .03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .card-hover {
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, .2);
+    }
+
+    .typing-dot:nth-child(1) {
+      animation: bounceDot 1.2s .0s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation: bounceDot 1.2s .2s infinite;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation: bounceDot 1.2s .4s infinite;
+    }
+
+    @keyframes bounceDot {
+
+      0%,
+      80%,
+      100% {
+        transform: translateY(0)
+      }
+
+      40% {
+        transform: translateY(-8px)
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #4f46e5;
+      border-radius: 3px;
+    }
+
+    #chat-messages {
+      scrollbar-width: thin;
+      scrollbar-color: #4f46e5 #0f172a;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 dark">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 glass border-b border-slate-800 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="text-xl font-bold gradient-text">SM</a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
+        <a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
+        <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+        <a href="/dashboard"
+          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-xs transition-colors">Dashboard</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-slate-300"
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm text-slate-300">
+      <a href="#about" class="hover:text-indigo-400">About</a>
+      <a href="#skills" class="hover:text-indigo-400">Skills</a>
+      <a href="#projects" class="hover:text-indigo-400">Projects</a>
+      <a href="#contact" class="hover:text-indigo-400">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl"></div>
+    <div class="relative z-10 text-center px-6 animate-fade-in">
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-xs text-indigo-300 border border-indigo-500/30">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          Available for opportunities
+        </div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-xs text-teal-300 border border-teal-500/30">
+          <svg class="w-3 h-3 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Open for Freelancing
+        </div>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+        <span class="text-white">Santhosh</span> <span class="gradient-text">M</span>
+      </h1>
+      <p class="text-xl md:text-2xl font-semibold text-slate-300 mb-3">AI/ML Engineer</p>
+      <p class="text-slate-400 max-w-2xl mx-auto mb-8 text-base leading-relaxed">
+        Specializing in production-grade <span class="text-indigo-400 font-medium">Generative AI</span>, RAG pipelines,
+        LLM fine-tuning &amp; multi-agent architectures. Based in Salem, Tamil Nadu, India.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#projects"
+          class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl font-semibold text-white transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40">View
+          Projects</a>
+        <a href="#contact"
+          class="px-8 py-3 glass border border-indigo-500/40 hover:border-indigo-400 rounded-xl font-semibold text-slate-200 transition-all">Get
+          In Touch</a>
+        <a href="/resume" download
+          class="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl font-semibold text-white transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 flex items-center gap-2 justify-center">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          </svg>
+          Download Resume
+        </a>
+        <a href="https://github.com/MSanthosh3" target="_blank"
+          class="px-8 py-3 glass border border-slate-700 hover:border-slate-500 rounded-xl font-semibold text-slate-300 transition-all">GitHub
+          ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">About <span class="gradient-text">Me</span></h2>
+      <p class="text-slate-400 text-center mb-16 max-w-xl mx-auto">A passion for building AI systems that actually work
+        in production</p>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-6">
+            🤖</div>
+          <h3 class="text-xl font-bold mb-4">Who I Am</h3>
+          <p class="text-slate-400 leading-relaxed mb-4">
+            I'm <span class="text-indigo-400 font-medium">Santhosh M</span>, an AI/ML Engineer based in Salem, Tamil
+            Nadu. I specialize in bridging cutting-edge AI research with real-world production deployment.
+          </p>
+          <p class="text-slate-400 leading-relaxed">
+            Currently at <span class="text-purple-400 font-medium">LezdotechMed</span>, I build AI
+            systems — RAG pipelines, multi-source retrieval agents, and graph-augmented QA systems. I've reduced AI
+            hallucination rates by <span class="text-green-400 font-medium">40%</span> in production.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass rounded-xl p-5 card-hover border border-indigo-500/20">
+            <div class="text-3xl mb-2">🎓</div>
+            <h4 class="font-semibold text-sm mb-1">Education</h4>
+            <p class="text-slate-400 text-xs">M.Phil &amp; M.Sc Applied Geology, Govt Arts College, Salem</p>
+          </div>
+          <div class="glass rounded-xl p-5 card-hover border border-purple-500/20">
+            <div class="text-3xl mb-2">🏆</div>
+            <h4 class="font-semibold text-sm mb-1">Certified</h4>
+            <p class="text-slate-400 text-xs">Oracle GenAI Pro · Salesforce AI Associate · Data Science Nanodegree</p>
+          </div>
+          <div class="glass rounded-xl p-5 card-hover border border-cyan-500/20">
+            <div class="text-3xl mb-2">📍</div>
+            <h4 class="font-semibold text-sm mb-1">Location</h4>
+            <p class="text-slate-400 text-xs">Salem, Tamil Nadu, India 🇮🇳</p>
+          </div>
+          <div class="glass rounded-xl p-5 card-hover border border-green-500/20">
+            <div class="text-3xl mb-2">⚡</div>
+            <h4 class="font-semibold text-sm mb-1">Experience</h4>
+            <p class="text-slate-400 text-xs">AI Developer @ LezdotechMed · ML Intern @ Giggso</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-24 px-6 bg-slate-900/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Tech <span class="gradient-text">Stack</span></h2>
+      <p class="text-slate-400 text-center mb-16 max-w-xl mx-auto">Tools and technologies I use to build production AI
+        systems</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-6 card-hover border border-indigo-500/20">
+          <div class="text-2xl mb-3">🤖</div>
+          <h3 class="font-bold text-indigo-400 mb-3">AI / ML Core</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">LLMs &amp; GenAI</span>
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">RAG Pipelines</span>
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">QLoRA / LoRA</span>
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">NLP / NER</span>
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">spaCy</span>
+            <span class="px-3 py-1 bg-indigo-500/20 rounded-full text-xs text-indigo-300">Scikit-learn</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 card-hover border border-purple-500/20">
+          <div class="text-2xl mb-3">⚡</div>
+          <h3 class="font-bold text-purple-400 mb-3">Frameworks</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">LangChain</span>
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">HuggingFace</span>
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">PyTorch</span>
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">PEFT / TRL</span>
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">FastAPI</span>
+            <span class="px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">Flask</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 card-hover border border-cyan-500/20">
+          <div class="text-2xl mb-3">🗄️</div>
+          <h3 class="font-bold text-cyan-400 mb-3">Databases &amp; Vectors</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">Milvus</span>
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">ChromaDB</span>
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">Neo4j</span>
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">PostgreSQL</span>
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">MySQL</span>
+            <span class="px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-300">SQLite</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 card-hover border border-green-500/20">
+          <div class="text-2xl mb-3">☁️</div>
+          <h3 class="font-bold text-green-400 mb-3">Cloud &amp; DevOps</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">Docker</span>
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">GitHub Actions</span>
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">HF Spaces</span>
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">Render</span>
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">Railway</span>
+            <span class="px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-300">Supabase</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 card-hover border border-orange-500/20">
+          <div class="text-2xl mb-3">🔍</div>
+          <h3 class="font-bold text-orange-400 mb-3">APIs &amp; Search</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-300">Tavily API</span>
+            <span class="px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-300">DuckDuckGo</span>
+            <span class="px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-300">Wikipedia REST</span>
+            <span class="px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-300">BeautifulSoup</span>
+            <span class="px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-300">Requests</span>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 card-hover border border-rose-500/20">
+          <div class="text-2xl mb-3">💻</div>
+          <h3 class="font-bold text-rose-400 mb-3">Languages &amp; Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">Python</span>
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">SQL</span>
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">PHP / Laravel</span>
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">Tableau</span>
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">ArcGIS</span>
+            <span class="px-3 py-1 bg-rose-500/20 rounded-full text-xs text-rose-300">Jupyter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Featured <span class="gradient-text">Projects</span>
+      </h2>
+      <p class="text-slate-400 text-center mb-16 max-w-xl mx-auto">Production AI systems built with real-world impact
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="glass rounded-2xl p-6 card-hover border border-indigo-500/20 flex flex-col">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl">
+              🏏</div>
+            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Live</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">CricBot IPL</h3>
+          <p class="text-slate-400 text-sm mb-4 flex-1">Fine-tuned TinyLlama-1.1B on 17 years of IPL data using
+            QLoRA/PEFT. Features Milvus Lite retrieval, Wikipedia fallback, spaCy NER session memory, and
+            franchise-themed UI — zero-cost hosting.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">TinyLlama</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">QLoRA</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Milvus</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">spaCy</span>
+          </div>
+          <a href="https://github.com/MSanthosh3" target="_blank"
+            class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors">View on GitHub →</a>
+        </div>
+
+
+        <div class="glass rounded-2xl p-6 card-hover border border-cyan-500/20 flex flex-col">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-2xl">
+              🔍</div>
+            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">Agent</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Multi-Source Retrieval Agent</h3>
+          <p class="text-slate-400 text-sm mb-4 flex-1">LangChain agent unifying Tavily, DuckDuckGo, and BeautifulSoup
+            with Claude as reasoning engine and tiered fallback logic for intelligent web information retrieval.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">LangChain</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Claude</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Tavily</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">BeautifulSoup</span>
+          </div>
+          <a href="https://github.com/MSanthosh3" target="_blank"
+            class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors">View on GitHub →</a>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-green-500/20 flex flex-col">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-2xl">
+              📊</div>
+            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">Graph DB</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Neo4j QA System</h3>
+          <p class="text-slate-400 text-sm mb-4 flex-1">Tiered QA pipeline with Neo4j graph audit layer, 100%
+            data integrity guarantee, and Claude-2 synthesis for knowledge extraction.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Neo4j</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Claude-2</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Python</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">GraphDB</span>
+          </div>
+          <a href="https://github.com/MSanthosh3" target="_blank"
+            class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors">View on GitHub →</a>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-yellow-500/20 flex flex-col">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center text-2xl">
+              ⚙️</div>
+            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded-full">ML Suite</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">ML Deployment with GUI</h3>
+          <p class="text-slate-400 text-sm mb-4 flex-1">Full ML model suite (classification, regression, clustering)
+            with Scikit-learn, wired into a real-time Tkinter GUI. </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Scikit-learn</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Tkinter</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Python</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Pandas</span>
+          </div>
+          <a href="https://github.com/MSanthosh3" target="_blank"
+            class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors">View on GitHub →</a>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-purple-500/20 flex flex-col">
+          <div class="flex items-start justify-between mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center text-2xl">
+              🌍</div>
+            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">Publication</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Groundwater Potential Zones</h3>
+          <p class="text-slate-400 text-sm mb-4 flex-1">Published peer-reviewed research using geospatial technology (ArcGIS 10.5 &amp; remote sensing) to demarcate groundwater potential zones in Edappadi Block, Salem, using multi-thematic overlays.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">ArcGIS</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Remote Sensing</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">GIS</span>
+            <span class="px-2 py-1 bg-slate-800 text-xs text-slate-300 rounded-md">Publication</span>
+          </div>
+          <a href="https://archive.conscientiabeam.com/index.php/10/article/view/1711" target="_blank"
+            class="text-indigo-400 text-sm hover:text-indigo-300 transition-colors mt-auto inline-flex items-center gap-1">Read Publication ↗</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 px-6 bg-slate-900/50">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get In <span class="gradient-text">Touch</span></h2>
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-500/15 border border-teal-500/30 rounded-full text-teal-300 text-xs font-medium">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Open for Freelancing
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-500/15 border border-indigo-500/30 rounded-full text-indigo-300 text-xs font-medium">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          AI/ML Opportunities
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/15 border border-purple-500/30 rounded-full text-purple-300 text-xs font-medium">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Collaborations
+        </span>
+      </div>
+      <div class="glass rounded-2xl p-8 border border-slate-700">
+        <div id="contact-alert" class="hidden mb-6 px-4 py-3 rounded-xl text-sm font-medium"></div>
+        <form id="contact-form" class="space-y-5">
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2" for="name">Name</label>
+              <input id="name" name="name" type="text" required placeholder="Your Name"
+                class="w-full px-4 py-3 bg-slate-800/60 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2" for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="your@email.com"
+                class="w-full px-4 py-3 bg-slate-800/60 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-300 mb-2" for="message">Message</label>
+            <textarea id="message" name="message" required rows="5"
+              placeholder="Tell me about your project or opportunity..."
+              class="w-full px-4 py-3 bg-slate-800/60 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit" id="submit-btn"
+            class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl font-semibold text-white transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40">
+            Send Message 🚀
+          </button>
+        </form>
+        <div class="mt-8 pt-8 border-t border-slate-700 grid grid-cols-3 gap-4 text-center">
+          <a href="mailto:bvmsanthosh@gmail.com"
+            class="group flex flex-col items-center gap-2 p-3 glass rounded-xl hover:border-indigo-500/50 border border-transparent transition-all">
+            <span class="text-2xl">📧</span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-400 transition-colors">Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/santhosh-mohankumar-6751a6232/" target="_blank"
+            class="group flex flex-col items-center gap-2 p-3 glass rounded-xl hover:border-indigo-500/50 border border-transparent transition-all">
+            <span class="text-2xl">💼</span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-400 transition-colors">LinkedIn</span>
+          </a>
+          <a href="https://github.com/MSanthosh3" target="_blank"
+            class="group flex flex-col items-center gap-2 p-3 glass rounded-xl hover:border-indigo-500/50 border border-transparent transition-all">
+            <span class="text-2xl">🐙</span>
+            <span class="text-xs text-slate-400 group-hover:text-indigo-400 transition-colors">GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-6 border-t border-slate-800 text-center">
+    <p class="text-slate-500 text-sm">© 2025 Santhosh M · Built with Flask &amp; Tailwind CSS</p>
+    <p class="text-slate-600 text-xs mt-2">🔒 Privacy: This site logs visitor IP addresses and browser info for
+      analytics purposes only.</p>
+  </footer>
+
+  <!-- CHAT WIDGET -->
+  <div id="chat-toggle" class="fixed bottom-6 right-6 z-50">
+    <button id="chat-btn" onclick="toggleChat()"
+      class="w-14 h-14 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full shadow-lg shadow-indigo-500/40 flex items-center justify-center text-white text-2xl hover:scale-110 transition-transform"
+      style="animation: pulseRing 2s infinite">
+      💬
+    </button>
+  </div>
+
+  <div id="chat-panel"
+    class="hidden fixed bottom-24 right-6 z-50 w-80 sm:w-96 flex flex-col glass border border-slate-700 rounded-2xl shadow-2xl shadow-indigo-500/20 overflow-hidden"
+    style="height:480px">
+    <!-- Header -->
+    <div
+      class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-indigo-600/80 to-purple-600/80 border-b border-slate-700">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        <span class="font-semibold text-sm">Ask about Santhosh</span>
+      </div>
+      <button onclick="toggleChat()" class="text-slate-300 hover:text-white transition-colors text-lg">✕</button>
+    </div>
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <div class="flex gap-2">
+        <div
+          class="w-7 h-7 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex-shrink-0 flex items-center justify-center text-xs">
+          🤖</div>
+        <div class="bg-slate-800 rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-xs">
+          Hey! 👋 I'm Santhosh's portfolio bot. Ask me anything about his skills, projects, or experience!
+        </div>
+      </div>
+    </div>
+    <!-- Suggestion Chips -->
+    <div id="chip-bar" class="px-4 py-2 flex gap-2 overflow-x-auto border-t border-slate-800 bg-slate-900/50">
+      <button onclick="sendChip(this)"
+        class="flex-shrink-0 px-3 py-1 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full text-xs hover:bg-indigo-500/30 transition-colors">What's
+        your tech stack?</button>
+      <button onclick="sendChip(this)"
+        class="flex-shrink-0 px-3 py-1 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full text-xs hover:bg-indigo-500/30 transition-colors">Tell
+        me about CricBot</button>
+      <button onclick="sendChip(this)"
+        class="flex-shrink-0 px-3 py-1 bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-full text-xs hover:bg-indigo-500/30 transition-colors">Work
+        experience?</button>
+    </div>
+    <!-- Input -->
+    <div class="p-3 border-t border-slate-800 bg-slate-900/80 flex gap-2">
+      <input id="chat-input" type="text" placeholder="Ask me anything..." maxlength="500"
+        class="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
+        onkeydown="if(event.key==='Enter')sendMessage()" />
+      <button onclick="sendMessage()"
+        class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white text-sm font-medium transition-colors">Send</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    function toggleChat() {
+      const panel = document.getElementById('chat-panel');
+      panel.classList.toggle('hidden');
+      if (!panel.classList.contains('hidden')) {
+        document.getElementById('chat-input').focus();
+        scrollChat();
+      }
+    }
+
+    function scrollChat() {
+      const msgs = document.getElementById('chat-messages');
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function appendMessage(text, isUser) {
+      const msgs = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = 'flex gap-2' + (isUser ? ' justify-end' : '');
+      if (isUser) {
+        div.innerHTML = '<div class="bg-indigo-600 rounded-2xl rounded-tr-sm px-3 py-2 text-sm text-white max-w-xs">' + escapeHtml(text) + '</div>';
+      } else {
+        div.innerHTML = '<div class="w-7 h-7 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex-shrink-0 flex items-center justify-center text-xs">🤖</div><div class="bg-slate-800 rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-xs whitespace-pre-line">' + escapeHtml(text) + '</div>';
+      }
+      msgs.appendChild(div);
+      scrollChat();
+      return div;
+    }
+
+    function showTyping() {
+      const msgs = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.className = 'flex gap-2';
+      div.innerHTML = '<div class="w-7 h-7 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex-shrink-0 flex items-center justify-center text-xs">🤖</div><div class="bg-slate-800 rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center"><span class="typing-dot w-2 h-2 bg-slate-400 rounded-full inline-block"></span><span class="typing-dot w-2 h-2 bg-slate-400 rounded-full inline-block"></span><span class="typing-dot w-2 h-2 bg-slate-400 rounded-full inline-block"></span></div>';
+      msgs.appendChild(div);
+      scrollChat();
+    }
+
+    function removeTyping() {
+      const t = document.getElementById('typing-indicator');
+      if (t) t.remove();
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      appendMessage(text, true);
+      showTyping();
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        await new Promise(r => setTimeout(r, 600));
+        removeTyping();
+        appendMessage(data.response || data.error || 'Something went wrong.', false);
+      } catch (e) {
+        removeTyping();
+        appendMessage('Connection error. Please try again.', false);
+      }
+    }
+
+    function sendChip(btn) {
+      document.getElementById('chat-input').value = btn.textContent;
+      sendMessage();
+    }
+
+    // Contact form
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const alert = document.getElementById('contact-alert');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            message: document.getElementById('message').value.trim()
+          })
+        });
+        const data = await res.json();
+        alert.className = 'mb-6 px-4 py-3 rounded-xl text-sm font-medium ' + (data.success ? 'bg-green-500/20 text-green-300 border border-green-500/30' : 'bg-red-500/20 text-red-300 border border-red-500/30');
+        alert.textContent = data.success ? '✅ Message sent! I\'ll get back to you soon.' : '❌ ' + (data.error || 'Something went wrong.');
+        alert.classList.remove('hidden');
+        if (data.success) e.target.reset();
+      } catch {
+        alert.className = 'mb-6 px-4 py-3 rounded-xl text-sm font-medium bg-red-500/20 text-red-300 border border-red-500/30';
+        alert.textContent = '❌ Connection error. Please try again.';
+        alert.classList.remove('hidden');
+      }
+      btn.textContent = 'Send Message 🚀';
+      btn.disabled = false;
+    });
+  </script>
+</body>
+
+</html>
