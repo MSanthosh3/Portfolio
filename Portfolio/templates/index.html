@@ -130,10 +130,12 @@
       </button>
     </div>
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-sm text-slate-300">
-      <a href="#about" class="hover:text-indigo-400">About</a>
-      <a href="#skills" class="hover:text-indigo-400">Skills</a>
-      <a href="#projects" class="hover:text-indigo-400">Projects</a>
-      <a href="#contact" class="hover:text-indigo-400">Contact</a>
+      <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">About</a>
+      <a href="#skills" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Skills</a>
+      <a href="#projects" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Projects</a>
+      <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-indigo-400 py-1 transition-colors">Contact</a>
+      <a href="/dashboard" onclick="document.getElementById('mobile-menu').classList.add('hidden')"
+        class="mt-2 w-full text-center px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-xs font-semibold transition-colors">Dashboard</a>
     </div>
   </nav>
 
@@ -486,7 +488,7 @@
   </div>
 
   <div id="chat-panel"
-    class="hidden fixed bottom-24 right-6 z-50 w-80 sm:w-96 flex flex-col glass border border-slate-700 rounded-2xl shadow-2xl shadow-indigo-500/20 overflow-hidden"
+    class="hidden fixed bottom-24 right-4 left-4 sm:right-6 sm:left-auto z-50 w-auto sm:w-96 flex flex-col glass border border-slate-700 rounded-2xl shadow-2xl shadow-indigo-500/20 overflow-hidden"
     style="height:480px">
     <!-- Header -->
     <div
